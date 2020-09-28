@@ -1,0 +1,14 @@
+{
+    "name": "mahaman/slim-work",
+    "description": "Work Hard",
+    "authors": [
+        {
+            "name": "227Mahaman",
+            "email": "zalkiabass.456@gmail.com"
+        }
+    ],
+    "require": {
+        "slim/slim": "3.5",
+        "psr/container": "1.0"
+    }
+}
