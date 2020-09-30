@@ -1,8 +1,10 @@
 <?php
 
+use App\Controllers\PagesController;
 use App\Database\db;
 use Slim\App;
-use Slim\Views\PhpRenderer;
+use Slim\Http\Request;
+use Slim\Http\Response;
 
 require 'vendor/autoload.php';
 
@@ -12,43 +14,53 @@ $app = new App([
     ]
 ]);
 
-//$app->get('/', PagesController::class . ':home');
-$app->get('/', function ($request, $response, $args) {//View Home
-    $renderer = new PhpRenderer('app/views/pages/');
-    return $renderer->render($response, "home.php", $args);
-});
-$app->post('/', function ($request, $response, $args) {//View Home add Users
-    $first_name = $request->getParam('first_name');
-    $last_name = $request->getParam('last_name');
-    $phone = $request->getParam('phone');
-    $email = $request->getParam('email');
-    $address = $request->getParam('address');
-    $city = $request->getParam('city');
-    $state = $request->getParam('state');
+require('app/container.php');
+
+$container = $app->getContainer();
+// Render PHP template in route
+$app->get('/', PagesController::class . ':home');
+$app->get('/lsts', PagesController::class . ':getUsers');
+$app->post('/', PagesController::class . ':postUser');
+
+//API
+//get all users
+$app->get('/api/users', function (Request $request, Response $reponse) {
+    $sql = "SELECT * FROM  users";
+    
     try {
-        //get db object
+
         $db = new db();
-        //conncect
         $pdo = $db->connect();
 
+        $stmt = $pdo->query($sql);
+        $users = $stmt->fetchAll(PDO::FETCH_OBJ);
 
-        $sql = "INSERT INTO users (first_name, last_name, phone,email,address,city,state) VALUES (?,?,?,?,?,?,?)";
-
-
-        $pdo->prepare($sql)->execute([$first_name, $last_name, $phone, $email, $address, $city, $state]);
-
-        echo '{"notice": {"text": "User '. $first_name .' has been just added now"}}';
         $pdo = null;
+        echo json_encode($users);
     } catch (\PDOException $e) {
-        echo '{"error": {"text": ' . $e->getMessage() . '}}';
+        echo '{"msg": {"resp": ' . $e->getMessage() . '}}';
     }
-    //$renderer = new PhpRenderer('app/views/pages/');
-    //return $renderer->render($response, "home.php", $args);
 });
-$app->get('/lstUsers', function ($request, $response, $args) {
-    $renderer = new PhpRenderer('app/views/pages/');
-    
-    return $renderer->render($response, "lstUsers.php", $args);
-});
+//get a single user
+$app->get('/api/users/{id}', function (Request $request, Response $reponse, array $args) {
+    $id = $request->getAttribute('id');
 
+    $sql = "SELECT * FROM users where id = $id";
+
+    try {
+        $db = new db();
+        $pdo = $db->connect();
+
+        $stmt = $pdo->query($sql);
+        $user = $stmt->fetchAll(PDO::FETCH_OBJ);
+
+        $pdo = null;
+
+
+        echo json_encode($user);
+    } catch (\PDOException $e) {
+        echo '{"msg": {"resp": ' . $e->getMessage() . '}}';
+    }
+});
+//Lancer l'application
 $app->run();

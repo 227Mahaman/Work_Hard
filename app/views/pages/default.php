@@ -12,7 +12,7 @@
     <title>Mon super projet</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="public/css/app.css" rel="stylesheet">
+    <link href="../css/app.css" rel="stylesheet">
 
     <![endif]-->
 </head>
@@ -32,7 +32,7 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                    <li><a href="logout.php"></a>Se déconnecter</li>
+                    <li><a href="/lsts">Listing</a></li>
                     <li><a href="register.php">S'inscrire</a></li>
                     <li><a href="login.php">Se connecter</a></li>
             </ul>
@@ -42,3 +42,4 @@
 
 <div class="container">
 
+<?php echo $content ?>
