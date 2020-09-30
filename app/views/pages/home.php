@@ -4,6 +4,15 @@ ob_start();
 ?>
 <h1>User</h1>
     <div class="row">
+    <?php if(isset($Oui)){?>
+        <div class="alert alert-success">    
+            <p>Success user add !</p>
+        </div>
+    <?php } elseif(isset($Non)) { ?>
+        <div class="alert alert-danger">    
+            <p>Echec user add !</p>
+        </div>
+    <?php }?>
     <div class="col-md-12">
     <form method="POST">
 

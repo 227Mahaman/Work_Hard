@@ -24,16 +24,26 @@ class db
         return $this->pdo;
     }
 
-    public function prepare($sql){
-        $req = $this->connect()->query($sql);
-        $result = $req->fetchAll(PDO::FETCH_ASSOC);
+    public function prepare($sql, $attributes){
+        $req = $this->connect()->prepare($sql);
+        $result = $req->execute($attributes);
         return $result;
     }
 
     public function query($sql){
         $req = $this->connect()->query($sql);
-        $result = $req->fetch();
+        $result = $req->fetchAll(PDO::FETCH_ASSOC);
         return $result;
+    }
+
+    public function insert($sql, $data = []){
+        //if($params){
+            var_dump($data);
+            $req = $this->connect()->prepare($sql);
+            $result = $req->execute($data);
+            return $result;
+            //echo '{"notice": {"text": "User has been just added now"}}';
+        //}
     }
 
     public function lastId(){
