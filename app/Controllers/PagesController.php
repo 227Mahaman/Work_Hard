@@ -35,9 +35,15 @@ class PagesController extends Controller {
         return $this->render($request, $response, '/lstUsers.php', ['resultat' => $result]);
     }
 
+    /**
+     * Fonction getUser Vue Liste info User
+     * @param Interface RequestInterface
+     * @param Interface RequestInterface
+     * @return layout lstUsers avec les information du user
+     */
     public function getUser(RequestInterface $request, ResponseInterface $response, $args = []){
-        $data ="";
-        $result = $this->getPDO()->prepare('SELECT * FROM users where id= ?', $data);
+        $id = $request->getAttribute('id');
+        $result = $this->getPDO()->query("SELECT * FROM users where id = $id");
         return $this->render($request, $response, '/lstUsers.php', ['resultat' => $result]);
     }
 

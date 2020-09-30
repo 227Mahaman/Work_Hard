@@ -7,6 +7,11 @@ class db
 {
     private $pdo;
 
+    /**
+     * Fonction Connect
+     * Elle nous permet de se connecter et d'instancier le pdo tout en vérifiant s'il existe déja.
+     * @return pdo la connection
+     */
     public function connect()
     {
         $host = "127.0.0.1";
@@ -24,18 +29,40 @@ class db
         return $this->pdo;
     }
 
+    /**
+     * Fonction Prepare
+     * @param String sql la requete
+     * @param String attributes
+     * @return le résultat
+     */
     public function prepare($sql, $attributes){
         $req = $this->connect()->prepare($sql);
         $result = $req->execute($attributes);
         return $result;
     }
 
-    public function query($sql){
+    /**
+     * Fonction Query
+     * @param String sql la requete
+     * @param Boolean one true/false
+     * @return le résultat
+     */
+    public function query($sql, $one = false){
         $req = $this->connect()->query($sql);
-        $result = $req->fetchAll(PDO::FETCH_ASSOC);
+        if($one){
+            $result = $req->fetch(PDO::FETCH_ASSOC);
+        } else {
+            $result = $req->fetchAll(PDO::FETCH_ASSOC);
+        }
         return $result;
     }
 
+    /**
+     * Fonction Insertion
+     * @param String sql la requete
+     * @param Array data les données
+     * @return l'execution
+     */
     public function insert($sql, $data = []){
         //if($params){
             var_dump($data);

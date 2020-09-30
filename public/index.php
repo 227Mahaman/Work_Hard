@@ -17,7 +17,8 @@ require('../app/container.php');
 $container = $app->getContainer();
 // Render PHP template in route
 $app->get('/', PagesController::class . ':home');//View Accueil
-$app->get('/lsts', PagesController::class . ':getUsers');//View Listing User
+$app->get('/lsts', PagesController::class . ':getUsers');//View Listing Users
+$app->get('/lsts/{id}', PagesController::class . ':getUser');//View getUser
 $app->post('/', PagesController::class . ':postUser');//View Accueil AddUser
 
 /*$app->get('/', function ($request, $response, $args = []) { Other type of routing
