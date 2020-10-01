@@ -116,8 +116,20 @@ class PagesController extends Controller {
         }
     }
 
-    public function postContact(RequestInterface $request, ResponseInterface $response){
-        
-        //return $this->redirect($response, 'contact');
+    public function deleteUser(RequestInterface $request, ResponseInterface $response){
+        $message = "Success opération !";
+        $id = $request->getAttribute('id');
+        $result = $this->getPDO()->prepare("DELETE from users where id='$id'");
+        //var_dump($result);
+        //die();
+        $users = $this->getPDO()->query('SELECT * FROM users');
+        if($result==false){
+            $type = "danger";
+            $message = "Echec opération !";
+            return $this->render($request, $response, '/lstUsers.php', ['resultat' => $users,'delete' => $message, 'type' => $type]);
+        } else {
+            $type = "success";
+            return $this->render($request, $response, '/lstUsers.php', ['resultat' => $users,'delete' => $message, 'type' => $type]);
+        }
     }
 }

@@ -35,9 +35,13 @@ class db
      * @param String attributes
      * 
      */
-    public function prepare($sql, $attributes){
+    public function prepare($sql, $attributes = []){
         $req = $this->connect()->prepare($sql);
-        $result = $req->execute($attributes);
+        if($attributes){
+            $result = $req->execute($attributes);
+        } else {
+            $result = $req->execute();
+        }
         return $result;
     }
 

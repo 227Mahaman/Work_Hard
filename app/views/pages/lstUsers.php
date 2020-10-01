@@ -3,6 +3,11 @@ $title = "Listing";
 ob_start();
 ?>
     <h1>Listing User</h1>
+    <?php if(isset($delete) and isset($type)): ?>
+        <div class="alert alert-<?=$delete?>">
+            <?= $delete; ?>
+        </div>
+    <?php endif; ?>
     <div class="row">
         <table class="table table-bordered">
             <tbody><tr>
@@ -32,6 +37,9 @@ ob_start();
                     <td>
                     <a href="/update/user/<?= $value['id'] ?>" class="btn btn-primary">
                         <i class="fa fa-edit"></i>
+                    </a>
+                    <a href="/users/delete/<?= $value['id'] ?>" class="btn btn-danger">
+                        <i class="fa fa-delete"></i>
                     </a>
                     </td>
                 </tr>

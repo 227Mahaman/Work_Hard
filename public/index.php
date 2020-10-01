@@ -25,6 +25,7 @@ $app->get('/lsts/{id}', PagesController::class . ':getUser');//View getUser
 $app->post('/', PagesController::class . ':postUser');//View Accueil AddUser
 $app->get('/update/user/{id}', PagesController::class . ':updateUser');//View Accueil UpdateUser
 $app->post('/update/user/{id}', PagesController::class . ':postUpdateUser');//View Accueil PostUpdateUser
+$app->get('/users/delete/{id}', PagesController::class . ':deleteUser');//Delete User
 $app->get('/login', LoginController::class . ':login');//View login
 $app->post('/login', LoginController::class . ':authentification');//View login Authentication
 
