@@ -1,10 +1,13 @@
 <?php
 
+use App\Controllers\LoginController;
 use App\Controllers\PagesController;
 use App\Database\db;
 use Slim\App;
 
 require '../vendor/autoload.php';
+
+session_start();
 
 $app = new App([
     'settings' => [
@@ -22,6 +25,8 @@ $app->get('/lsts/{id}', PagesController::class . ':getUser');//View getUser
 $app->post('/', PagesController::class . ':postUser');//View Accueil AddUser
 $app->get('/update/user/{id}', PagesController::class . ':updateUser');//View Accueil UpdateUser
 $app->post('/update/user/{id}', PagesController::class . ':postUpdateUser');//View Accueil PostUpdateUser
+$app->get('/login', LoginController::class . ':login');//View login
+$app->post('/login', LoginController::class . ':authentification');//View login Authentication
 
 /*$app->get('/', function ($request, $response, $args = []) { Other type of routing
     $renderer = $this->view;

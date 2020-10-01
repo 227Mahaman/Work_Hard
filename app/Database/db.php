@@ -33,7 +33,7 @@ class db
      * Fonction Prepare
      * @param String sql la requete
      * @param String attributes
-     * @return le résultat
+     * 
      */
     public function prepare($sql, $attributes){
         $req = $this->connect()->prepare($sql);
@@ -75,5 +75,10 @@ class db
 
     public function lastId(){
         return $this->connect()->lastInsertId();
+    }
+
+    public function login($sql, $attributes){
+        $req = $this->prepare($sql, $attributes);
+        return $req;
     }
 }

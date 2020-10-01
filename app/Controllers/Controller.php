@@ -15,6 +15,11 @@ class Controller {
         $this->container = $container;
     }
 
+    public function getPDO()
+    {
+        return new db();
+    }
+
     public function render(RequestInterface $request, ResponseInterface $response, $file, $params = [])
     {
         $this->container->view->render($response, $file, $params);

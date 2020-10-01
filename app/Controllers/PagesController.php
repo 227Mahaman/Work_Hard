@@ -3,16 +3,8 @@ namespace App\Controllers;
 
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
-use App\Database\db;
-use PDO;
 
 class PagesController extends Controller {
-
-
-    public function getPDO()
-    {
-        return new db();
-    }
 
     /**
      * Fonction Vue Home
