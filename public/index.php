@@ -20,6 +20,8 @@ $app->get('/', PagesController::class . ':home');//View Accueil
 $app->get('/lsts', PagesController::class . ':getUsers');//View Listing Users
 $app->get('/lsts/{id}', PagesController::class . ':getUser');//View getUser
 $app->post('/', PagesController::class . ':postUser');//View Accueil AddUser
+$app->get('/update/user/{id}', PagesController::class . ':updateUser');//View Accueil UpdateUser
+$app->post('/update/user/{id}', PagesController::class . ':postUpdateUser');//View Accueil PostUpdateUser
 
 /*$app->get('/', function ($request, $response, $args = []) { Other type of routing
     $renderer = $this->view;

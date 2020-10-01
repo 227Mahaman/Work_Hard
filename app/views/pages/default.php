@@ -12,7 +12,7 @@
     <title>Mon super projet</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="../css/app.css" rel="stylesheet">
+    <link href="css/app.css" rel="stylesheet">
 
     <![endif]-->
 </head>
@@ -28,13 +28,13 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Mon super projet</a>
+            <a class="navbar-brand" href="/">Mon super projet</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                     <li><a href="/lsts">Listing</a></li>
-                    <li><a href="register.php">S'inscrire</a></li>
-                    <li><a href="login.php">Se connecter</a></li>
+                    <li><a href="#">S'inscrire</a></li>
+                    <li><a href="/login">Se connecter</a></li>
             </ul>
         </div><!--/.nav-collapse -->
     </div>
