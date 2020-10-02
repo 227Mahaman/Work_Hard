@@ -13,7 +13,28 @@ class PagesController extends Controller {
      * @return layout vue home (accueil)
      */
     public function home(RequestInterface $request, ResponseInterface $response, $args = []){
-        $this->render($request, $response, '/home.php');
+        var_dump($args);
+        if(isset($args)){//Il recupere vide (à revoir)
+            $id = $request->getParam($args['id']);
+            $first_name = $request->getParam($args['first_name']);
+            $last_name = $request->getParam($args['last_name']);
+            $phone = $request->getParam($args['phone']);
+            $email = $request->getParam($args['email']);
+            $address = $request->getParam($args['address']);
+            $city = $request->getParam($args['city']);
+            $state = $request->getParam($args['state']);
+            $this->render($request, $response, '/home.php', ['id' => $id,
+                'first_name' => $first_name,
+                'last_name' => $last_name,
+                'phone' => $phone,
+                'email' =>$email,
+                'address' => $address,
+                'city' => $city,
+                'state' => $state]
+            );
+        } else {
+            $this->render($request, $response, '/home.php');
+        }
     }
 
     /**
@@ -24,7 +45,19 @@ class PagesController extends Controller {
      */
     public function getUsers(RequestInterface $request, ResponseInterface $response, $args = []){
         $result = $this->getPDO()->query('SELECT * FROM users');
-        return $this->render($request, $response, '/lstUsers.php', ['resultat' => $result]);
+        if(isset($args) && $args!=[]){
+            $type = $request->getParam($args['type']);
+            $message = $request->getParam($args['delete']);
+            return $this->render($request, $response, '/lstUsers.php', [
+                'resultat' => $result,
+                'type' => $type,
+                'delete' => $message
+                ]
+            );
+        } else {
+            return $this->render($request, $response, '/lstUsers.php', ['resultat' => $result]);
+        }
+        
     }
 
     /**
@@ -71,7 +104,7 @@ class PagesController extends Controller {
     public function updateUser(RequestInterface $request, ResponseInterface $response){
         $id = $request->getAttribute('id');
         $result = $this->getPDO()->query("SELECT * FROM users where id = $id");
-        var_dump($result);
+        //var_dump($result);
         return $this->render($request, $response, '/home.php', ['id' => $id,
         'first_name' => $result['0']['first_name'],
         'last_name' => $result['0']['last_name'],
@@ -81,6 +114,15 @@ class PagesController extends Controller {
         'city' => $result['0']['city'],
         'state' => $result['0']['state']
         ]);
+        /*return $this->home($request, $response, ['id' => $id,
+            'first_name' => $result['0']['first_name'],
+            'last_name' => $result['0']['last_name'],
+            'phone' => $result['0']['phone'],
+            'email' => $result['0']['email'],
+            'address' => $result['0']['address'],
+            'city' => $result['0']['city'],
+            'state' => $result['0']['state']
+        ]);*/
     }
 
     /**
@@ -129,7 +171,8 @@ class PagesController extends Controller {
             return $this->render($request, $response, '/lstUsers.php', ['resultat' => $users,'delete' => $message, 'type' => $type]);
         } else {
             $type = "success";
-            return $this->render($request, $response, '/lstUsers.php', ['resultat' => $users,'delete' => $message, 'type' => $type]);
+            //return $this->render($request, $response, '/lstUsers.php', ['resultat' => $users,'delete' => $message, 'type' => $type]);
+            return $this->getUsers($request, $response, ['type' => $type, 'delete' => $message]);
         }
     }
 }

@@ -3,7 +3,7 @@ $title = "Listing";
 ob_start();
 ?>
     <h1>Listing User</h1>
-    <?php if(isset($delete) and isset($type)): ?>
+    <?php if(isset($delete)&& isset($type)): ?>
         <div class="alert alert-<?=$delete?>">
             <?= $delete; ?>
         </div>

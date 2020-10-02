@@ -36,6 +36,5 @@ $app->post('/login', LoginController::class . ':authentification');//View login 
     //var_dump($result);
     return $renderer->render($response, "/home.php", ['resultat' => $result]);
 });*/
-
 //Lancer l'application
 $app->run();

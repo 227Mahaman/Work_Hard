@@ -51,12 +51,15 @@ class db
      * @param Boolean one true/false
      * @return le résultat
      */
-    public function query($sql, $one = false){
+    public function query($sql, $objet = false, $one = false){
         $req = $this->connect()->query($sql);
+        if($objet === true){
+            $req->setFetchMode(PDO::FETCH_OBJ);
+        }
         if($one){
-            $result = $req->fetch(PDO::FETCH_ASSOC);
+            $result = $req->fetch();
         } else {
-            $result = $req->fetchAll(PDO::FETCH_ASSOC);
+            $result = $req->fetchAll();
         }
         return $result;
     }

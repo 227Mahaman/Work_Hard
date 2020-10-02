@@ -12,7 +12,7 @@
     <title>Mon super projet</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="css/app.css" rel="stylesheet">
+    <link href="public/css/app.css" rel="stylesheet">
 
     <![endif]-->
 </head>
