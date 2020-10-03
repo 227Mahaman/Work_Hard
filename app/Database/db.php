@@ -35,14 +35,30 @@ class db
      * @param String attributes
      * 
      */
-    public function prepare($sql, $attributes = []){
+    public function prepare($sql, $attributes = [], $one = false){
+        //$req = $this->getPDO()->prepare($statement);
+        //$res = $req->execute($attributes);
         $req = $this->connect()->prepare($sql);
         if($attributes){
             $result = $req->execute($attributes);
         } else {
             $result = $req->execute();
         }
-        return $result;
+        if(
+            strpos($sql, 'UPDATE') === 0 ||
+            strpos($sql, 'INSERT') === 0 ||
+            strpos($sql, 'DELETE') === 0
+        )
+        {
+            return $result;
+        }
+        if($one){
+            $datas = $req->fetch();
+        }
+        else{
+            $datas = $req->fetchAll();
+        }
+        return $datas;
     }
 
     /**

@@ -1,6 +1,7 @@
 <?php
 
 use App\Controllers\APIController;
+use App\Controllers\LoginController;
 use App\Controllers\PagesController;
 use App\Database\db;
 use Slim\App;
