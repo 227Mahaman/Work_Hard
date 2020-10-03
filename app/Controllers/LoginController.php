@@ -25,9 +25,11 @@ class LoginController extends Controller {
     public function authentification(RequestInterface $request, ResponseInterface $response, $args = []){
         $email = $request->getParam('email');
         $city = $request->getParam('city');
-        $user = $this->getPDO()->prepare("SELECT * FROM users where email=? AND city=?", [$email, $city]);
+        $user = $this->getPDO()->prepare("SELECT * FROM users where email=?", [$email]);
         if($user){
-            if($user->city === $city){
+            //var_dump($user);
+            //var_dump($user['0']['city']);
+            if($user['0']['city'] == $city){
                 $_SESSION['auth'] = $user->id;
                 $this->render($request, $response, '/home.php', ['auth' => $_SESSION['auth']]);
              } else {
