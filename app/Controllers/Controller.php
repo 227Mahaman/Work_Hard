@@ -40,4 +40,13 @@ class Controller {
         return $this->container->get($name);
     }
 
+    public function logged(){
+        return isset($_SESSION['auth']);
+    }
+
+    protected function forbidden(){
+        header('HTTP/1.0 403 forbidden');
+        die('Access interdit');
+    }
+
 }

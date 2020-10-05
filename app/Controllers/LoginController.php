@@ -30,7 +30,7 @@ class LoginController extends Controller {
             //var_dump($user);
             //var_dump($user['0']['city']);
             if($user['0']['city'] == $city){
-                $_SESSION['auth'] = $user->id;
+                $_SESSION['auth'] = $user['0']['id'];
                 $this->render($request, $response, '/home.php', ['auth' => $_SESSION['auth']]);
              } else {
                 $_SESSION['Connect'] = "Veuillez réessayer !";
@@ -40,5 +40,10 @@ class LoginController extends Controller {
             $_SESSION['Connect'] = "Veuillez réessayer !";
             return $this->render($request, $response, '/login.php', ['Notconnected' => $_SESSION['Connect']]);
         }
+    }
+
+    public function seDeconnecter(RequestInterface $request, ResponseInterface $response){
+        $this->getPDO()->deconnexion();
+        return $this->render($request, $response, '/login.php');
     }
 }

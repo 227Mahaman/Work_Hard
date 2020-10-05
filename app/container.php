@@ -19,3 +19,7 @@ $container['view'] = function ($container){
 $phpView = new  PhpRenderer($dir . "/app/views/pages");
 return $phpView;
 };
+
+// $container['session'] = function ($container) {
+//     return new Session();
+// };

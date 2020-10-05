@@ -1,5 +1,8 @@
 <?php
 $title = "Accueil";
+var_dump($_SESSION["auth"]);
+var_dump($auth);
+    //    die();
 ob_start();
 ?>
 <h1>User</h1>

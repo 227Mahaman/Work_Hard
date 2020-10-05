@@ -34,7 +34,12 @@
             <ul class="nav navbar-nav">
                     <li><a href="/lsts">Listing</a></li>
                     <li><a href="#">S'inscrire</a></li>
+                    <?php
+                    if(isset($_SESSION)){?>
+                    <li><a href="/deconnexion">Se deconnecter</a></li>
+                    <?php } else {?>
                     <li><a href="/login">Se connecter</a></li>
+                    <?php }?>
             </ul>
         </div><!--/.nav-collapse -->
     </div>

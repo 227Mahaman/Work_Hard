@@ -104,4 +104,15 @@ class db
         $req = $this->prepare($sql, $attributes);
         return $req;
     }
+
+    public function logged(){
+        return isset($_SESSION['auth']);
+    }
+    /**
+     * Deconnexion Fonction
+     * @return Session destroy
+     */
+    public function deconnexion(){
+        return session_destroy();
+    }
 }

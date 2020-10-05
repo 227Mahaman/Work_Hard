@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 use App\Controllers\APIController;
 use App\Controllers\LoginController;
 use App\Controllers\PagesController;
@@ -19,6 +19,16 @@ $app = new App([
 require('app/container.php');
 
 $container = $app->getContainer();
+
+//Session middleware
+// $app->add(function (Request $request, Response $response, $next) {
+//     /* @var Container $this */
+//     $session = $this->get('session');
+//     $session->start();
+//     $response = $next($request, $response);
+//     $session->save();
+//     return $response;
+// });
 // Render PHP template in route
 $app->get('/', PagesController::class . ':home');//View Accueil
 $app->get('/lsts', PagesController::class . ':getUsers');//View Listing Users
@@ -29,6 +39,7 @@ $app->post('/update/user/{id}', PagesController::class . ':postUpdateUser');//Vi
 $app->get('/users/delete/{id}', PagesController::class . ':deleteUser');//Delete User
 $app->get('/login', LoginController::class . ':login');//View login
 $app->post('/login', LoginController::class . ':authentification');//View login Authentication
+$app->get('/deconnexion', LoginController::class . ':seDeconnecter');//Se deconnecter
 
 //API
 //get all users
